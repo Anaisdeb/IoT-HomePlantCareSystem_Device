@@ -14,13 +14,13 @@
 #include <BLEPeripheral.h>
 
 //define sensor pin
-#define SENSOR_PIN 5
+#define SENSOR_PIN 14
 
 //variable for a timer
 long previousMillis = 0;
 
  // interval at which we change (send) data (milliseconds)
-long interval = 100;          
+long interval = 1000;          
 
 //custom boards may override default pin definitions with BLEPeripheral(PIN_REQ, PIN_RDY, PIN_RST)
 BLEPeripheral           blePeripheral        = BLEPeripheral();
@@ -57,7 +57,7 @@ void characteristicUnsubscribed(BLECentral& central, BLECharacteristic& characte
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 #if defined (__AVR_ATmega32U4__)
   delay(5000);  //5 seconds delay for enabling to see the start up comments on the serial board
 #endif
@@ -98,12 +98,15 @@ void loop() {
     previousMillis = currentMillis;   
   
     // read the analog input
-   //int analogValue = analogRead(SENSOR_PIN); 
-   int analogValue = random(40); 
+   int analogValue = analogRead(SENSOR_PIN); 
+   //int analogValue = random(40); 
    //save it in the characteristic
     sensorCharacteristic.setValue(analogValue);
-  
-   Serial.println(analogValue);
+
+   Serial.print("Decimal: ");
+   Serial.print(analogValue);
+   Serial.print(" Hexadecimal: ");
+   Serial.println(analogValue, HEX);
  
  }
   

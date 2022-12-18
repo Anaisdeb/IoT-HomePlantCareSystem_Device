@@ -20,7 +20,7 @@
 long previousMillis = 0;
 
  // interval at which we change (send) data (milliseconds)
-long interval = 1000;          
+long interval = 60000;          
 
 //custom boards may override default pin definitions with BLEPeripheral(PIN_REQ, PIN_RDY, PIN_RST)
 BLEPeripheral           blePeripheral        = BLEPeripheral();
